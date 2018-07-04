@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'comments',
     'campgrounds',
     'widget_tweaks',
+    'avatar',
 ]
 
 MESSAGE_TAGS = {

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load humanize %}
-{% load gravatar %}
+{% load avatar_tags %}
 {% load static %}
 {% block title %}{{campground.name}} {% endblock %}
 {% block styles %}<link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css" /> {% endblock %}
@@ -51,20 +51,23 @@
               {% for comment in comments %}
             <div class="row">
                <div class="col-md-12">
-                  <span class="float-right text-muted">{{comment.created_at|naturaltime}}</span>
-                  <p class="font-weight-bold text-muted">{{comment.user.first_name}} {{comment.user.last_name}}</p>
-                  <p class="text-justify">{{comment.comment}}</p>
-                  {% if comment.user.username == user.username %}
+                   <div class="media">
+                       {% avatar comment.user 75 class="mr-3" id="user_avatar" %}
+                      <div class="media-body">
+                        <p class="mt-0"><span class="h5">{{comment.user.first_name}} {{comment.user.last_name}}</span> <span class="float-right text-muted">{{comment.created_at|naturaltime}}</span></p>
+                        <p class="text-muted text-justify">{{comment.comment}}</p>
+                {% if comment.user.username == user.username %}
                   <div class=" mb-3">
                        <a  href="" class="btn btn-warning" style="display:inline">Edit <ion-icon size="medium" name="create"></ion-icon></a>
                        <a  href="{% url 'comment:delete_comment' campground.id campground.slug comment.id %}" class="btn btn-danger text-dark" style="display:inline">Delete <ion-icon  size='medium' name="close"></ion-icon></a>
                   </div>
                   {% endif %}
+                      </div>
+                    </div>
                </div>
             </div>
             <hr/>
            {% endfor %}
-           
            {% else %}
            <div class="text-center">
                <h5>Be the first to add a comment!</h5>
