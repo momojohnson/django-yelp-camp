@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}{{title}} {% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-7 mx-auto mt-3">
+            <h4 class='text-center'>Add a new campground</h4>
+            <form method="post" action="{% url 'campgrounds:add_campground' %}" enctype="multipart/form-data" novalidate >
+            {% csrf_token %}
+            {% include 'includes/form.html' with form=form %}
+           <button type="submit" class="btn btn-primary mb-3">Add campground</button>  
+    </form>
+    </div>
+    </div>
+</div>
+{% endblock %}

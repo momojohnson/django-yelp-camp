@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}{{title}} {% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-7 mx-auto mt-3">
+           
+            <h4 class='text-center'>Add comment for {{campground.name}}</h4>
+            <form method="post"  novalidate >
+            {% csrf_token %}
+            {% include 'includes/form.html' with form=form %}
+           <button type="submit" class="btn btn-primary mb-3">Add comment</button>  
+    </form>
+    </div>
+    </div>
+</div>
+{% endblock %}

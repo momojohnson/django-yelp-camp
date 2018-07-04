@@ -1,0 +1,17 @@
+{% extends 'registration/registration_base.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}{% trans "Resend Activation Email" %}{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/accounts.css' %}" type="text/css" />
+{% endblock %}
+{% block content %}
+<div class="col-sm-6 mx-auto card mt-5">
+    <p class="lead text-center">Please enter your email address to resend activation Email.</p>
+    <form method="post" action="" novalidate>
+    {% csrf_token %}
+    {% include 'includes/form.html' with form=form %}
+    <button type="submit" class="btn btn-primary mb-3">{% trans 'Resend Email' %}</button>
+</form>
+{% endblock %}

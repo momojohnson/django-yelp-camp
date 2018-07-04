@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Edit {{campground.name}} {% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-7 mx-auto mt-3">
+            <h4 class='text-center'> Edit {{campground.name}}</h4>
+            <form method="post"  enctype="multipart/form-data" novalidate >
+            {% csrf_token %}
+            {% include 'includes/form.html' with form=form %}
+           <p><button type="submit" class="btn btn-primary mb-3">Save Changes</button> <a class = 'btn btn-primary mb-3' href="{% url 'campgrounds:campground_details' campground.pk campground.slug %}"> Cancel</a></p> 
+    </form>
+    </div>
+    </div>
+</div>
+
+{% endblock %}

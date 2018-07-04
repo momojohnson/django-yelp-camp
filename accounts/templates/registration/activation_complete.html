@@ -1,0 +1,15 @@
+{% extends 'registration/registration_base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Account Activated" %}{% endblock %}
+{% block content %}
+<div class="col-sm-7 mx-auto mt-5">
+<div class="alert alert-success" role="alert">
+  <h4 class="alert-heading text-center">{% trans 'Account Activated!' %}</h4>
+  <p> {% trans "Your account is now activated." %}
+    {% if not user.is_authenticated %}
+    <h4>{% trans "You can now " %}<a href="{% url 'auth_login' %}" class='btn btn-primary'>{% trans 'Login' %}</a></h4>
+    {% endif %}</p>
+
+</div>
+</div>
+{% endblock %}

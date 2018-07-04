@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{title}}{% endblock %}
+{% block styles %} <link rel="stylesheet" href="{% static 'css/landing.css' %}" type="text/css" /> {% endblock %}
+
+{% block body %}
+<div id="landing-header">
+ 	<h1>Welcome to YelpCamp!</h1>
+		<a href="{% url 'campgrounds:list_campgrounds' %}" class="btn btn-lg btn-success">View All Campgrounds</a>
+    </div>
+    <ul class="slideshow">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+{% endblock %}

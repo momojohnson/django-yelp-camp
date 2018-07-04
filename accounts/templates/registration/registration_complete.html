@@ -1,0 +1,13 @@
+{% extends 'registration/registration_base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Activation email sent" %}{% endblock %}
+{% block content %}
+<div class="col-sm-7 mx-auto mt-5">
+<div class="alert alert-success" role="alert">
+  <h4 class="alert-heading">{% trans 'Registration Success!' %}</h4>
+  <p>{% trans 'We sent an email to the email address you give us.' %}</p>
+  <p class="mb-0">{% trans 'Please check your email to complete the registration process..'%}</p>
+   <p class="mb-0">{% trans "If you didn't receive the email, please click" %} <a class="btn btn-primary" href="{% url 'registration_resend_activation' %}">{% trans 'resend email' %}</a> to have the email resend. </p>
+</div>
+</div>
+{% endblock %}

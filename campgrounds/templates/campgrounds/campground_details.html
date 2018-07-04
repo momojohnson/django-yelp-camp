@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load gravatar %}
+{% load static %}
+{% block title %}{{campground.name}} {% endblock %}
+{% block styles %}<link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css" /> {% endblock %}
+{% block body %}
+{% include 'includes/navbar.html'  %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 mt-3">
+             <p class="lead text-center">Yelp Camp<p>
+            <ul class="list-group">
+              <li class="list-group-item active">Information section</li>
+              <li class="list-group-item text-dark">Total Campgrounds: {{campground.get_total_campgrounds}}</li>
+              <li class="list-group-item text-dark">Total users: {{campground.get_total_number_of_current_user}}</li>
+              <li class="list-group-item text-dark">Total comments: {{total_comments}}</li>
+              <li class="list-group-item text-dark">Campground max price: {{campground.get_max_and_min_campground_price.price__max}}</li>
+              <li class="list-group-item text-dark">Campround min price: {{campground.get_max_and_min_campground_price.price__min}}</li>
+              <li class="list-group-item text-dark">Campground Avg price: {{campground.get_max_and_min_campground_price.price__avg}}</li>
+              </ul>
+         <div id="map" class="mt-2"></div>
+            </div>
+            <div class="col-md-9 mt-3">
+            <div class="card">
+              <img class="card-img-top" src="{{campground.image_url}}" alt="A campground image">
+              <div class="card-body">
+                  <h4 class=" float-right">{{campground.price}}/Night</h4>
+                  <a href=""><h4 class="text-primary font-bold pb-0 campground-name">{{campground.name}}</h4></a>
+                <p class="card-text text-justify mb-0 campground-description">{{campground.description}}</p>
+                <span id="lng">{{campground.lng}}</span>
+                <span id="lat">{{campground.lat}}</span>
+                <span id="loc">{{campground.location}}</span>
+              </div>
+              <p class="ml-4 text-primary">Submitted By: {{campground.user.first_name}} {{campground.user.last_name}} {{campground.created_at|naturaltime }}</p>
+              {% if campground.user.username == user.username %}
+              <div class="mb-0 ml-4 mb-2">
+                <a href="{% url 'campgrounds:edit_campground' campground.pk campground.slug %}" class="btn btn-warning">Edit <ion-icon size="medium" name="create"></ion-icon></a>
+             <a href="{% url 'campgrounds:delete_campground' campground.pk campground.slug %}" class="btn btn-danger text-dark">Delete <ion-icon name="close"></ion-icon></a>
+             <p class="float-right mr-4 font-weight-bold text-muted">{{campground.comments.count}} comment{{campground.comments.count|pluralize}}</p>
+            </div>
+            {% endif %}
+            </div>
+            <div class="card card-header mt-3 mb-3">
+                <div class="">
+                    <a href="{% url 'comment:add_new_comment' campground.id campground.slug %}" class="btn btn-success float-right" style="display:inline">Leave a comment</a>
+                </div>
+                <hr/>
+
+              {% if comments %}
+              {% for comment in comments %}
+            <div class="row">
+               <div class="col-md-12">
+                  <span class="float-right text-muted">{{comment.created_at|naturaltime}}</span>
+                  <p class="font-weight-bold text-muted">{{comment.user.first_name}} {{comment.user.last_name}}</p>
+                  <p class="text-justify">{{comment.comment}}</p>
+                  {% if comment.user.username == user.username %}
+                  <div class=" mb-3">
+                       <a  href="" class="btn btn-warning" style="display:inline">Edit <ion-icon size="medium" name="create"></ion-icon></a>
+                       <a  href="{% url 'comment:delete_comment' campground.id campground.slug comment.id %}" class="btn btn-danger text-dark" style="display:inline">Delete <ion-icon  size='medium' name="close"></ion-icon></a>
+                  </div>
+                  {% endif %}
+               </div>
+            </div>
+            <hr/>
+           {% endfor %}
+           
+           {% else %}
+           <div class="text-center">
+               <h5>Be the first to add a comment!</h5>
+           </div>
+          {% endif %}
+            </div>
+            {% include 'includes/pagination.html' %}
+            </div>
+            
+        </div>
+    </div>
+    {% block mapcontent %}
+    <script src="{% static 'js/googlemap.js' %}"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArqBRe-0nSAMl-ZOeBinb1SJsGgyltGJY&callback=initMap"></script>
+    {% endblock %}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'registration/registration_base.html' %}
+{% load i18n %}
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/accounts.css' %}" type="text/css" />
+{% endblock %}
+{% block title %}{% trans "Register|Yelp Camp" %} {% endblock %}
+{% block content %}
+<div class="col-sm-7 mx-auto mt-2">
+    <div class="card">
+    <div class="card-body">
+    <h5 class="text-center mt-2">Create an Acount</h5>
+    <form method="post" action="" novalidate>
+    {% csrf_token %}
+    {% include 'includes/form.html' with form=form %}
+    <input type="submit" class="btn btn-primary mb-0" value="{% trans 'Create an account' %}" />
+    </form>
+    </div>
+        
+    <div class="card-footer text-muted text-center">
+        Already have an account? <a href="{% url 'auth_login' %}">Log in</a>
+    </div>
+    </div>
+    </div>
+</div>
+
+{% endblock %}

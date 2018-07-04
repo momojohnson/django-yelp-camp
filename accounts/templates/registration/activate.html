@@ -1,0 +1,11 @@
+{% extends 'registration/registration_base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Activation Failure" %}{% endblock %}
+{% block content %}
+<div class="col-sm-7 mx-auto mt-5">
+<div class="alert alert-danger" role="alert">
+  <h4 class="alert-heading">{% trans 'Registration Success!' %}</h4>
+    <p>{% trans "Account activation failed." %}</p>
+</div>
+</div>
+{% endblock %}

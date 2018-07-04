@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}{{title}} {% endblock %}
+ {% block body %}
+ {% include 'includes/navbar.html'  %}
+<div class="jumbotron">
+ {% if user.is_authenticated %}
+  <h1 class="text-center">Welcome to Yelp Camp {{ user.get_full_name }}</h1>
+  <p class="lead">At Yelp Camp, we are interested in seeing our members share their camping experiences with each other..</p>
+  <hr class="my-4">
+  <p>You can use the buttons below to either add a campground or go back to home page.</p>
+  <p class="lead">
+    <p><a class="btn btn-primary btn-lg" href="{% url 'home' %}">Home</a> <a class='btn btn-primary btn-lg' href="{% url 'campgrounds:add_campground' %}">Add Campground</a></p>
+  </p>
+  {% else %}
+    <h1 class="text-center">Hello there, Welcome to Yelp Camp!</h1>
+  <p class="lead">At Yelp Camp, we are interested in seeing our members share their camping experiences with each other...</p>
+  <hr class="my-4">
+  <p>You can use the buttons below to either add a campground or go back to home page.</p>
+  <p class="lead">
+    <p><a class="btn btn-primary btn-lg" href="{% url 'home' %}">Home</a> <a class='btn btn-primary btn-lg' href="{% url 'campgrounds:add_campground' %}">Add campground</a></p>
+  </p>
+  {% endif %}
+</div>
+<div class="container">
+    <div class="row">
+        {% if campgrounds %}
+           {% for campground in campgrounds %}
+            <div class="col-md-4">
+            <figure class="figure img-thumbnail">
+              <img src="{{campground.image_url}}" class="figure-img img-fluid " alt="An image of a campground.">
+              <figcaption class="figure-caption text-center">{{campground.name}} <a class="btn btn-primary btn-sm float-right" href="{% url 'campgrounds:campground_details' campground.pk campground.slug %}">view more</a></figcaption>
+            </figure>
+            </div>
+            {% endfor %}
+          {% else %}
+          <h4>No campgrounds have been added</h4>
+          {% endif %}
+    </div>
+    {% include "includes/pagination.html" %}
+</div>
+
+</div>
+
+{% endblock %}
+    
+     
