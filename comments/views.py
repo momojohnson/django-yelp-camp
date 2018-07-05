@@ -1,7 +1,9 @@
+from django.shortcuts import get_object_or_404, redirect, render, reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils.decorators import method_decorator
-from django.shortcuts import redirect, render, reverse, get_object_or_404
+from django.urls import reverse_lazy
+from django.views.generic.edit import UpdateView
 from django.views import View
 from campgrounds.models import Campground
 from . forms import CommentForm
@@ -32,7 +34,22 @@ class CreateNewCommentView(View):
         campground = get_object_or_404(Campground, id=kwargs.get('campground_id'), slug=kwargs.get('slug'))
         form = CommentForm()
         return render(request, 'comments/new_comment.html', {'form':form, 'campground':campground, 'title':'Add Comment'})
-            
+
+@method_decorator(login_required, name='dispatch')
+class UpdateCommentView(UpdateView):
+    model = Comment
+    fields = ('comment', )
+    template_name = 'comments/edit_comment.html'
+    pk_url_kwarg = 'comment_id'
+    context_object_name = 'comment'
+    
+
+    def form_valid(self, form):
+        self.comment = form.save(commit=False)
+        self.comment.save()
+        return redirect(reverse('campgrounds:campground_details', kwargs={'campground_id':comment.campground.pk, 'slug':comment.campground.slug}))
+    
+    
 @login_required           
 def delete_comment(request, campground_id, slug, comment_id):
     """ Handles delete operation for a comment at route campgrounds/<int:campground_id>/<slug:slug>/comments/<int:comment_id>/"""

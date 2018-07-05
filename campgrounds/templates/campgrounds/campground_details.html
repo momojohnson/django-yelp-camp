@@ -58,7 +58,7 @@
                         <p class="text-muted text-justify">{{comment.comment}}</p>
                 {% if comment.user.username == user.username %}
                   <div class=" mb-3">
-                       <a  href="" class="btn btn-warning" style="display:inline">Edit <ion-icon size="medium" name="create"></ion-icon></a>
+                       <a  href="{% url 'comment:edit_comment' campground.id campground.slug comment.id %}" class="btn btn-warning" style="display:inline">Edit <ion-icon size="medium" name="create"></ion-icon></a>
                        <a  href="{% url 'comment:delete_comment' campground.id campground.slug comment.id %}" class="btn btn-danger text-dark" style="display:inline">Delete <ion-icon  size='medium' name="close"></ion-icon></a>
                   </div>
                   {% endif %}

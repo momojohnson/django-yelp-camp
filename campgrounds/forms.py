@@ -13,8 +13,7 @@ class CampgroundForm(forms.ModelForm):
         widgets={
             'price': forms.NumberInput(attrs={'step':'0.50', 'min':'0.00'}),
         }
-
-
+   
 class CampgroundEditForm(forms.ModelForm):
     image = forms.ImageField(required=False)
     description = forms.CharField(
