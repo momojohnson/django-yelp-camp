@@ -52,7 +52,13 @@ class ListAllCampgroundsView(ListView):
     model = Campground
     context_object_name = 'campgrounds'
     template_name = 'campgrounds/list_all_campgrounds.html'
-    paginate_by = 12
+    paginate_by = 6
+    
+           
+    def get_queryset(self):
+        queryset = Campground.objects.all().order_by('-created_at')
+        return queryset
+    
     def get_context_data(self, **kwargs):
         context = super(ListAllCampgroundsView, self).get_context_data(**kwargs)
         context['title'] = 'List Campgrounds'
@@ -71,6 +77,7 @@ class CampgroundDetailView(ListView):
         kwargs['campground'] = self.campground
         kwargs['total_comments'] = Comment.objects.count()
         return super().get_context_data(**kwargs)
+ 
     
     def get_queryset(self):
         self.campground = get_object_or_404(Campground, pk=self.kwargs.get('campground_id'))

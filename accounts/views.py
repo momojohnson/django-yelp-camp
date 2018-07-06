@@ -9,11 +9,9 @@ import django
 
 class HomePageView(TemplateView):
     template_name = 'home.html'
-    context = None
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
         context['title'] = 'Home'
-        print(context)
         return context
 
 
