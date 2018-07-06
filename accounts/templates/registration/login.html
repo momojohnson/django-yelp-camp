@@ -1,11 +1,13 @@
 {% extends 'registration/registration_base.html' %}
 {% load i18n %}
 {% load static %}
+
 {% block title %}{% trans "Login" %}{% endblock %}
 
 {% block styles %}
 <link rel="stylesheet" href="{% static 'css/accounts.css' %}" type="text/css" />
 {% endblock %}
+
 {% block content %}
 <div class="col-sm-4 mx-auto card mt-5">
     <h5 class="text-center mt-2">Login</h5>
