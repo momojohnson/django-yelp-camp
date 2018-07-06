@@ -122,8 +122,8 @@ LOGOUT_REDIRECT_URL = 'home'
 # Django registration redux settings
 SITE_ID = 1
 ACCOUNT_ACTIVATION_DAYS = 3
-DEFAULT_FROM_EMAIL = 'Yelp Camp Team <noreply@yelpcampteam.com>'
-EMAIL_SUBJECT_PREFIX = '[Yelp Camp Team]'
+DEFAULT_FROM_EMAIL = 'Django Yelp Camp Team <noreply@djangoyelcamp.site>'
+EMAIL_SUBJECT_PREFIX = '[Django Yelp Camp]'
 
 
 EMAIL_BACKEND = config('EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
