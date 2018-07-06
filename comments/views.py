@@ -19,7 +19,6 @@ class CreateNewCommentView(View):
         if form.is_valid():
             comment_form = form.save(commit=False)
             campground = get_object_or_404(Campground, id=kwargs.get('campground_id'), slug=kwargs.get('slug'))
-            print(campground)
             comment_form.user = request.user
             comment_form.campground = campground
             comment_form.save()
