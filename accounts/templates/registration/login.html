@@ -9,12 +9,12 @@
 {% endblock %}
 
 {% block content %}
-<div class="col-sm-4 mx-auto card mt-5">
+<div class="col-sm-5 mx-auto card mt-5">
     <h5 class="text-center mt-2">Login</h5>
     <form method="post" action="" novalidate>
     {% csrf_token %}
     {% include 'includes/form.html' with form=form %}
-    <p><button type="submit" class="btn btn-primary mb-3">{% trans 'Log in' %}
+    <p><button type="submit" class="btn btn-primary mb-3">{% trans 'Log in' %}  </button> <a class="float-right btn btn-link lead" href="{% url 'registration_register' %}">Signup</a> 
     </button> <a class="float-right btn btn-link lead" href="{% url 'auth_password_reset' %}">Forgot your password?</a></p> 
 </form>
 {% endblock %}
