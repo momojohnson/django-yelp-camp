@@ -46,7 +46,7 @@ class UpdateCommentView(UpdateView):
     def form_valid(self, form):
         self.comment = form.save(commit=False)
         self.comment.save()
-        return redirect(reverse('campgrounds:campground_details', kwargs={'campground_id':comment.campground.pk, 'slug':comment.campground.slug}))
+        return redirect(reverse('campgrounds:campground_details', kwargs={'campground_id':self.comment.campground.pk, 'slug':self.comment.campground.slug}))
     
     
 @login_required           
