@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}{{title}} {% endblock %}
  {% block body %}
+ {% block styles %}
+ <link rel="stylesheet" href="{% static 'css/campground.css' %}" type="text/css" />
+ {% endblock %}
  {% include 'includes/navbar.html'  %}
 <div class="jumbotron">
  {% if user.is_authenticated %}

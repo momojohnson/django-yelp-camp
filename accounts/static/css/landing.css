@@ -1,3 +1,12 @@
+@media (max-width: 767.98px) {
+  #landing-header h1{
+    font-size: 25px;
+    
+  }
+}
+
+
+
 body{
     background-color: #000;
 }
