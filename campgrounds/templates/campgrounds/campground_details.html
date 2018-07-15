@@ -32,7 +32,7 @@
                 <span id="lat">{{campground.lat}}</span>
                 <span id="loc">{{campground.location}}</span>
               </div>
-              <p class="ml-4 text-primary">Submitted By: {{campground.user.first_name}} {{campground.user.last_name}} {{campground.created_at|naturaltime }}</p>
+              <p class="ml-4 text-primary">Submitted By: <a href="{% url 'accounts:user_profile' campground.user.username campground.user.pk %}">{{campground.user.first_name}} {{campground.user.last_name}}</a> {{campground.created_at|naturaltime }}</p>
               {% if campground.user.username == user.username %}
               <div class="mb-0 ml-4 mb-2">
                 <a href="{% url 'campgrounds:edit_campground' campground.pk campground.slug %}" class="btn btn-warning">Edit <ion-icon size="medium" name="create"></ion-icon></a>
@@ -54,7 +54,7 @@
                    <div class="media">
                        {% avatar comment.user 75 class="mr-3" id="user_avatar" %}
                       <div class="media-body">
-                        <p class="mt-0"><span class="h5">{{comment.user.first_name}} {{comment.user.last_name}}</span> <span class="float-right text-muted">{{comment.created_at|naturaltime}}</span></p>
+                        <p class="mt-0"><a href="{% url 'accounts:user_profile' comment.user.username comment.user.pk %}"><span class="h5">{{comment.user.first_name}} {{comment.user.last_name}}</span></a> <span class="float-right text-muted">{{comment.created_at|naturaltime}}</span></p>
                         <p class="text-muted text-justify">{{comment.comment}}</p>
                 {% if comment.user.username == user.username %}
                   <div class=" mb-3">

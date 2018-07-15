@@ -23,5 +23,6 @@ urlpatterns = [
     path('accounts/register/', views.UserRegistration.as_view(), name='registration_register'),
     path('accounts/', include('registration.backends.default.urls')),
     path('campgrounds/<int:campground_id>/<slug:slug>/comments/', include('comments.urls')),
-    path('campgrounds/', include('campgrounds.urls'))
+    path('campgrounds/', include('campgrounds.urls')),
+    path('accounts/', include('accounts.urls')),
 ]
